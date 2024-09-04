@@ -3,6 +3,9 @@ const app = express()
 const bodyParser = require('body-parser');
 const loginRoute = require('./src/routes/loginRoute')
 const temperatureRoute = require('./src/routes/temperatureRoute')
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger-output-json');
+const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(loginRoute)
