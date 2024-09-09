@@ -1,16 +1,19 @@
-const swaggerAutogen = require('swagger-autogen')({openapi: '3.1.0'});
+const swaggerAutogen = require('swagger-autogen')({ openapi: '3.1.0' });
 
 const doc = {
     info: {
-        version : "1.0.0",
+        version: "1.0.0",
         title: "exercicio1",
         description: ""
     },
-    servers[
+    servers: [
         {
             url: "http://localhost:3000"
         }
-    ],   
+    ],
 };
 
-const outputFile = './swagger'
+const outputFile = './swagger-output.json';
+const endpointFiles = ['./index.js'];
+
+swaggerAutogen(outputFile, endpointFiles, doc).then(() => { require('./') });
