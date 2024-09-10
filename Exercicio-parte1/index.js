@@ -1,14 +1,12 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
-const loginRoute = require('./src/routes/loginRoute')
-const temperatureRoute = require('./src/routes/temperatureRoute')
+const rota = require('./src/routes/route')
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger-output.json');
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(loginRoute)
-app.use(temperatureRoute)
+app.use(rota)
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(express.static('img'));
 
