@@ -30,3 +30,33 @@ const result = await Project.findById(req.params.id);
     res.status(500).json(err);
   }
 };
+
+exports.update = async function(req, res) {
+  try {
+    const updatedProject = await Project.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title,
+        description: req.body.description,
+        assignedTo: req.body.assignedTo
+      },
+      { new: true } // Retorna o projeto atualizado
+    );
+    
+    if (!updatedProject) return res.status(404).json({ message: 'Project not found' });
+    res.json(updatedProject);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+// Função para deletar um projeto existente
+exports.delete = async function(req, res) {
+  try {
+    const deletedProject = await Project.findByIdAndDelete(req.params.id);
+    if (!deletedProject) return res.status(404).json({ message: 'Project not found' });
+    res.json({ message: 'Project deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

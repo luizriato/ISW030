@@ -2,11 +2,19 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const userRoute = require('./src/routes/userRoute')
-const mongoose = require('mongoose');
+const projectRoute = require('./src/routes/projectRoute')
+const mongoose = require('mongoose')
+const swaggerUi = require('swagger-ui-express');
+const swaggerui = require('swagger-ui-express')
+const swaggerFile = require('./swagger-output.json')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(userRoute)
+app.use(projectRoute)
+app.use(bodyParser.json())
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+
 app.listen(3000, () => {
     console.log('servidor rodando na porta 3000')
 })
